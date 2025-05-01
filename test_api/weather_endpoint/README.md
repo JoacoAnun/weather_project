@@ -1,4 +1,4 @@
-# Open Meteo API
+# Hitroical Endpoint
 
 - Historical Data URL: https://open-meteo.com/en/docs/historical-weather-api
 
