@@ -1,12 +1,29 @@
+"""Get geocoding data for a specific location using Open Meteo API."""
+
+import sys
+import logging
 import requests
 
-
-# Request to the endpoint
-# Added country code for more specific location, if using only Cordoba for example and count > 1, it brings also Cordova from Span and other
-data = requests.get(
-    url="https://geocoding-api.open-meteo.com/v1/search?name=Cordoba&count=1&language=en&format=json&countryCode=AR"
+# Logging configuration
+logging.basicConfig(
+    level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Print data if status code of get request = 200 OK
-if data.status_code == 200:
-    print(data.json())
+try:
+    logging.info("Requesting data")
+    # Request to the endpoint
+    data = requests.get(
+        url=(
+            "https://geocoding-api.open-meteo.com/v1/search"
+            "?name=Cordoba&count=1&language=en&format=json&countryCode=AR"
+        ),
+        timeout=10,
+    )
+
+except requests.exceptions.ConnectionError as CError:
+    logging.error(CError)
+    sys.exit(1)
+
+logging.info("Data retrieved")
+
+print(data.json())
