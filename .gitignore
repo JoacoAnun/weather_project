@@ -1,3 +1,4 @@
 .git_local
 env
 .cache.sqlite
+.pytest_cache
